@@ -1,6 +1,9 @@
 import './App.css';
-import {useState, useEffect} from "react";
-import axios, { Axios } from "axios";
+import './index.css';
+import {useState} from "react";
+
+//components
+import SingleCard from './components/SingleCard';
 
 const cardImages = [
   {"src": "/img/baby-yoda.webp"},
@@ -21,6 +24,8 @@ function App() {
   // STATES
   const [cards, setCards] = useState([])
   const [turns, setTurns] = useState(0)
+  const [choiceOne, setChoiceOne] = useState(null);
+  const [choiceTwo, setChoiceTwo] = useState(null);
 
   //shuffle cards
   const shuffleCards = () => {
@@ -31,13 +36,30 @@ function App() {
     setCards(shuffledCards)
     setTurns(0)
   }
+  // console.log(cards,turns)
 
-  console.log(cards,turns)
+  //handle choice
+  const handleChoice = (card) => {
+    console.log(card)
+    choiceOne ? setChoiceTwo(card) : setChoiceOne(card)
+    // if choiceOne is null then setChoiceOne
+    // if choiceOne is true then update setChoiceTwo
+  }
 
   return (
     <div>
-    <h1>Galaxy Matching Game</h1>
-    <button onClick={shuffleCards}> New Game</button>
+      <h1>Space Matching Card Game</h1>
+      <button onClick={shuffleCards}> Start Game</button>
+
+    <div className="card-grid">
+      {cards.map(card => (
+        <SingleCard 
+          key={card.id} 
+          card={card}
+          handleChoice={handleChoice} 
+        />
+      ))}
+    </div>
     </div>
   );
 }
