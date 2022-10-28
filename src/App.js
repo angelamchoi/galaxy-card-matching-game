@@ -63,7 +63,7 @@ function App() {
         resetTurn()
       } else {
         console.log('no match :(')
-        resetTurn()
+        setTimeout(()=>resetTurn(), 1000) //wait a sec then fire resetTurn
       }
     }
   }, [choiceOne, choiceTwo])
