@@ -88,6 +88,7 @@ function App() {
           key={card.id} 
           card={card}
           handleChoice={handleChoice} 
+          flipped={card === choiceOne || card === choiceTwo || card.matched} //3 scenarios in which a card should be flipped
         />
       ))}
     </div>
